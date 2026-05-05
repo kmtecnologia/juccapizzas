@@ -1,0 +1,28 @@
+<?php
+
+class Pizza
+{
+    private $conn;
+    private $tabela = "pizzas";
+    public $idPizza;
+    public $nome;
+    public $ingredientes;
+    public $valor;
+
+    public function __construct($db) {
+        $this->conn = $db;
+    }
+
+    // Salvando a query em SQL em uma variável
+    public function getall() {
+        $query = "SELECT idPizza, nome, ingredientes, valor FROM " . $this->tabela;
+        // Preparando a query para execução, ou seja, vinculando ela à conexão com o banco de dados
+        $stmt = $this->conn->prepare($query);
+        
+        $stmt->execute(); // Executando a query no banco de dados
+        
+        return $stmt; // Retornando o resultado da query para ser usado em outro lugar 
+     }
+
+}
+
