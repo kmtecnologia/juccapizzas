@@ -7,7 +7,7 @@ class Database
     private $host = 'localhost';
     private $db_name = 'jucapizzadb';
     private $username = 'root';
-    private $password = 'usbw';
+    private $password = '';
     private $port = '3306';
 
     public $conn;
