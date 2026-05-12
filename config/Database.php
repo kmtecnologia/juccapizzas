@@ -1,4 +1,4 @@
-// ...existing code...
+
 <?php
 
 class Database
@@ -42,4 +42,3 @@ class Database
     }
 }
 ?>
-// ...existing code...
