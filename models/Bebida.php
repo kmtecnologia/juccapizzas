@@ -58,5 +58,28 @@ class Bebida
             $this->valor = $row['valor'];
         }
     }
+    public function add() {
+        // 1. Correção no nome da coluna: era 'dercricao', o correto é 'descricao'
+        $query = 'INSERT INTO ' . $this->tabela . ' SET nome = :nome, descricao = :descricao, valor = :valor';
+        
+        $stmt = $this->conn->prepare($query);
+        
+        // Limpa os dados
+        $this->nome = htmlspecialchars(strip_tags($this->nome));
+        $this->descricao = htmlspecialchars(strip_tags($this->descricao));
+        $this->valor = htmlspecialchars(strip_tags($this->valor));
+        
+        // 2. Correção no Bind: o placeholder deve ser ':descricao' para bater com a query
+        $stmt->bindParam(':nome', $this->nome);
+        $stmt->bindParam(':descricao', $this->descricao);
+        $stmt->bindParam(':valor', $this->valor);
+        
+        if($stmt->execute()) {
+            return true;
+        }
+        
+        return false;
+    }
+       
 }
 ?>
