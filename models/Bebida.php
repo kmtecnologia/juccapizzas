@@ -80,6 +80,32 @@ class Bebida
         
         return false;
     }
+    public function update() {
+        // Query de atualização
+        $query = 'UPDATE ' . $this->tabela . ' SET nome=:nome, descricao=:descricao, valor=:valor WHERE idBebida=:id';
+    
+        // Preparar a query
+        $stmt = $this->conn->prepare($query);
+    
+        // Limpar os dados
+        $this->nome = htmlspecialchars(strip_tags($this->nome));
+        $this->descricao = htmlspecialchars(strip_tags($this->descricao));
+        $this->valor = htmlspecialchars(strip_tags($this->valor));
+        $this->idBebida = htmlspecialchars(strip_tags($this->idBebida));
+    
+        // Vincular os parâmetros
+        $stmt->bindParam(':nome', $this->nome);
+        $stmt->bindParam(':descricao', $this->descricao);
+        $stmt->bindParam(':valor', $this->valor);
+        $stmt->bindParam(':id', $this->idBebida);
+    
+        // Executar a query
+        if($stmt->execute()) {
+            return true;
+        }
+     
+        return false;
+    }
        
 }
 ?>
