@@ -88,6 +88,25 @@ class Pizza
  
     return false;
 }
-     
-}
+public function delete() {
+ 
+    // Query DELETE
+    $query = 'DELETE FROM ' . $this->tabela . ' WHERE idPizza = :id';
 
+    // Preparar query
+    $stmt = $this->conn->prepare($query);
+
+    // Limpar dados
+    $this->idPizza = htmlspecialchars(strip_tags($this->idPizza));
+
+    // Vincular parâmetro
+    $stmt->bindParam(':id', $this->idPizza);
+
+    // Executar query
+    if($stmt->execute()) {
+        return true;
+    }
+
+    return false;
+}
+}
